@@ -1,13 +1,16 @@
 const express=require("express")
 const app=express()
 require("dotenv").config()
-const {mailRoute}=require("./routes/mailRoute")
+const mailRoute=require("./routes/mailRoute")
 const {connectDb}=require("./config/connectDB")
 const {connectCloudinary}=require("./config/connectCloudinary")
 const fileexpress=require("express-fileupload")
 
 app.use(express.json())
-app.use(fileexpress())
+app.use(fileexpress({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}))
 
 const PORT=process.env.PORT || 4000
 app.listen(PORT,()=>{

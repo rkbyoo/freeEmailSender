@@ -1,11 +1,11 @@
 const Mail=require("../models/mailSchema")
 const cloudinary=require("cloudinary").v2
 
-const uploadToCloudinary=async(file,folder,quality="auto")=>{
-    cloudinary.uploader.upload(file,{folder,quality})
+async function uploadToCloudinary(file,folder){
+   return await cloudinary.uploader.upload(file.tempFilePath,{folder})
 }
 
-const emailSendHandler=async(req,res)=>{
+exports.emailSendHandler=async(req,res)=>{
     try {
         const {name,email,text,from}=req.body
         const imageFile=req.files.imageFile
@@ -20,20 +20,30 @@ const emailSendHandler=async(req,res)=>{
                 message:"please Upload only valid image like png,jpeg,jpg"
             })
         }
-        //lets upload the file to cloudinary and save it in the database
-        const response=await uploadToCloudinary(imageFile,'mailApp')
-        const fileInfo=await Mail.create({
-            name,
-            email,
-            text,
-            from,
-            imageUrl:response.secure_url
-        })
-        res.status(200).json({
-            success:true,
-            message:"Mail has been successfully sent",
-            data:fileInfo.imageUrl
-        })
+        try {
+            //lets upload the file to cloudinary and save it in the database
+            const response=await uploadToCloudinary(imageFile,"mailApp")
+            console.log("response from cloudinary",response)
+            const fileInfo=await Mail.create({
+                name,
+                email,
+                text,
+                from,
+                imageUrl:response.secure_url
+            })
+            res.status(200).json({
+                success:true,
+                message:"Mail has been successfully sent",
+                imagefile:fileInfo.imageUrl
+            })
+        } catch (error) {
+            console.error("error while uploading and saving",error)
+            res.status(500).json({
+                success:false,
+                message:"some error while uploading and saving"
+            })
+        }
+        
     } catch (error) {
         console.error("some error occured while sending the email",error)
         res.status(500).json({
@@ -41,6 +51,6 @@ const emailSendHandler=async(req,res)=>{
             message:"internal server error"
         })
     }
-   
+      
     
 }
