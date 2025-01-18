@@ -20,7 +20,6 @@ exports.emailSendHandler=async(req,res)=>{
                 message:"please Upload only valid image like png,jpeg,jpg"
             })
         }
-        try {
             //lets upload the file to cloudinary and save it in the database
             const response=await uploadToCloudinary(imageFile,"mailApp")
             console.log("response from cloudinary",response)
@@ -31,18 +30,12 @@ exports.emailSendHandler=async(req,res)=>{
                 from,
                 imageUrl:response.secure_url
             })
+            console.log(fileInfo)
             res.status(200).json({
                 success:true,
                 message:"Mail has been successfully sent",
                 imagefile:fileInfo.imageUrl
             })
-        } catch (error) {
-            console.error("error while uploading and saving",error)
-            res.status(500).json({
-                success:false,
-                message:"some error while uploading and saving"
-            })
-        }
         
     } catch (error) {
         console.error("some error occured while sending the email",error)
