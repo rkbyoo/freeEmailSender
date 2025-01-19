@@ -44,6 +44,4 @@ exports.emailSendHandler=async(req,res)=>{
             message:"internal server error"
         })
     }
-      
-    
 }
