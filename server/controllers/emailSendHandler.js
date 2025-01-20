@@ -33,7 +33,7 @@ exports.emailSendHandler=async(req,res)=>{
             console.log(fileInfo)
             res.status(200).json({
                 success:true,
-                message:"Mail has been successfully sent",
+                message:"Mail sent",
                 imagefile:fileInfo.imageUrl
             })
         

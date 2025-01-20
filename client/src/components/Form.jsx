@@ -1,22 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Form() {
+  const [formData, setFormData] = useState({ 
+    name: "", 
+    email: "", 
+    from: "", 
+    imageFile: null, 
+    text: "" 
+  });
+
+  function changeHandler(event) {
+    const { name, value, type, files } = event.target;
+    setFormData(prevData => ({ 
+      ...prevData, 
+      [name]: type === "file" ? files[0] : value 
+    }));
+    console.log(formData)
+
+  }
+
+  async function submitHandler(event) {
+    event.preventDefault();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("from", formData.from);
+    formDataToSend.append("text", formData.text);
+    if (formData.imageFile) {
+      formDataToSend.append("imageFile", formData.imageFile);
+    }
+
+    console.log(formDataToSend)
+
+    try {
+      const response = await fetch("http://localhost:4000/api/v1/emailsend", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        console.log("email sent successfully")
+        console.log(response)
+      } 
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("An error occurred. Please try again.");
+    }
+  }
+
   return (
     <div>
-      <form className="max-w-sm mx-auto bg-black p-5 rounded-lg">
+      <form 
+        className="max-w-sm mx-auto bg-black p-5 rounded-lg" 
+        onSubmit={submitHandler}
+      >
         {/* Receiver's Email Address */}
         <div className="mb-5">
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             Receiver's Email Address
           </label>
           <input
             type="email"
             id="email"
+            name="email"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="name@flowbite.com"
+            value={formData.email}
+            onChange={changeHandler}
             required
           />
         </div>
@@ -24,16 +77,19 @@ function Form() {
         {/* Random Name */}
         <div className="mb-5">
           <label
-            htmlFor="randomName"
+            htmlFor="name"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Random Name
           </label>
           <input
             type="text"
-            id="randomName"
+            id="name"
+            name="name"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Choose your anon name"
+            value={formData.name}
+            onChange={changeHandler}
             required
           />
         </div>
@@ -49,23 +105,47 @@ function Form() {
           <input
             type="text"
             id="from"
+            name="from"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="name&lt;abc@gmail.com&gt;"
+            value={formData.from}
+            onChange={changeHandler}
+          />
+        </div>
+
+        {/* Text */}
+        <div className="mb-5">
+          <label
+            htmlFor="text"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Text
+          </label>
+          <input
+            type="text"
+            id="text"
+            name="text"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder="Enter your text here"
+            value={formData.text}
+            onChange={changeHandler}
           />
         </div>
 
         {/* File Upload */}
         <div className="mb-5">
           <label
-            htmlFor="fileUpload"
+            htmlFor="imageFile"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Attach a File
           </label>
           <input
             type="file"
-            id="fileUpload"
+            id="imageFile"
+            name="imageFile"
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 focus:outline-none"
+            onChange={changeHandler}
           />
         </div>
 

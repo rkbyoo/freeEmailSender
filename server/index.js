@@ -5,7 +5,14 @@ const mailRoute=require("./routes/mailRoute")
 const {connectDb}=require("./config/connectDB")
 const {connectCloudinary}=require("./config/connectCloudinary")
 const fileexpress=require("express-fileupload")
+const cors=require("cors")
 
+//middleware
+app.use(cors({
+    origin: 'http://localhost:3000', // Specify the frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true, // Enable cookies if needed
+  }));
 app.use(express.json())
 app.use(fileexpress({
     useTempFiles : true,
