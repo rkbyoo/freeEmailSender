@@ -34,7 +34,7 @@ function Form() {
     console.log(formDataToSend)
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/emailsend", {
+      const response = await fetch(process.env.REACT_APP_BASE_URL, {
         method: "POST",
         body: formDataToSend,
       });

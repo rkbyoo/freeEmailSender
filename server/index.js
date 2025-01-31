@@ -9,7 +9,7 @@ const cors=require("cors")
 
 //middleware
 app.use(cors({
-    origin: 'http://localhost:3000', // Specify the frontend origin
+    origin: 'https://anon-email-sender-virid.vercel.app/', // Specify the frontend origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
     credentials: true, // Enable cookies if needed
   }));
