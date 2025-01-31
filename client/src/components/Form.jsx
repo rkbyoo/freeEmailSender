@@ -35,6 +35,11 @@ function Form() {
     console.log(formDataToSend)
 
     try {
+      toast.promise(submitHandler, {
+        loading: 'sending email...',
+        success: 'Email sent successfully',
+        error: 'Error while sending email,try later',
+      });
       const response = await fetch(process.env.REACT_APP_BASE_URL, {
         method: "POST",
         body: formDataToSend,
@@ -58,11 +63,7 @@ function Form() {
       // toast.error("somthing went wrong")
       console.error("Error sending email:", error);
     }
-    toast.promise(submitHandler, {
-      loading: 'sending email...',
-      success: 'Email sent successfully',
-      error: 'Error while sending email,try later',
-    });
+    
   }
 
  
