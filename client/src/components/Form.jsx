@@ -54,6 +54,7 @@ function Form() {
           });
         console.log(response)
       } 
+      toast.dismiss(toastId);
     }
      catch (error) {
       toast.dismiss(toastId);
