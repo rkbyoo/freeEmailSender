@@ -58,7 +58,7 @@ function Form() {
       } 
     } catch (error) {
       toast.dismiss(toastId);
-      toast.error("somthing went wrong")s
+      toast.error("somthing went wrong")
       console.error("Error sending email:", error);
     }
     
