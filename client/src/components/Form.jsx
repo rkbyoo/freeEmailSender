@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState ,useNavigate} from 'react';
+import { toast,ToastContainer } from 'react-toastify';
 
 function Form() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ 
     name: "", 
     email: "", 
@@ -41,6 +43,17 @@ function Form() {
 
       if (response.ok) {
         console.log("email sent successfully")
+        navigate('/thanks')
+        toast.success('🦄 Wow so easy!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark"
+          });
         console.log(response)
       } 
     } catch (error) {
@@ -51,6 +64,7 @@ function Form() {
 
   return (
     <div>
+      <ToastContainer />
       <form 
         className="max-w-sm mx-auto bg-black p-5 rounded-lg" 
         onSubmit={submitHandler}
