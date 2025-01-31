@@ -43,23 +43,29 @@ function Form() {
 
       if (response.ok) {
         console.log("email sent successfully")
-        toast.success('Email sent successfully', {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark"
-          });
+        // toast.success('Email sent successfully', {
+        //   position: "top-center",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: false,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "dark"
+        //   });
         console.log(response)
       } 
     } catch (error) {
+      // toast.error("somthing went wrong")
       console.error("Error sending email:", error);
-      alert("An error occurred. Please try again.");
     }
   }
+
+  toast.promise(submitHandler, {
+    loading: 'sending email...',
+    success: 'Email sent successfully',
+    error: 'Error while sending email,try later',
+  });
 
   return (
     <div>
