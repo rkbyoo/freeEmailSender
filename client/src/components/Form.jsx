@@ -22,7 +22,7 @@ function Form() {
 
   async function submitHandler(event) {
     event.preventDefault();
-    toast.loading("sending email")
+    const toastId = toast.loading("Sending email...");
 
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
@@ -43,6 +43,7 @@ function Form() {
 
       if (response.ok) {
         console.log("email sent successfully")
+        toast.dismiss(toastId);
         toast.success('Email sent successfully', {
           position: "top-center",
           autoClose: 5000,
@@ -56,7 +57,8 @@ function Form() {
         console.log(response)
       } 
     } catch (error) {
-      toast.error("somthing went wrong")
+      toast.dismiss(toastId);
+      toast.error("somthing went wrong")s
       console.error("Error sending email:", error);
     }
     
