@@ -159,7 +159,7 @@ function Form() {
             htmlFor="imageFile"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Attach a File
+            Attach a Image file:
           </label>
           <input
             type="file"
