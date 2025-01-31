@@ -2,7 +2,6 @@ import React, { useState ,useNavigate} from 'react';
 import { toast,ToastContainer } from 'react-toastify';
 
 function Form() {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ 
     name: "", 
     email: "", 
