@@ -43,8 +43,7 @@ function Form() {
 
       if (response.ok) {
         console.log("email sent successfully")
-        navigate('/thanks')
-        toast.success('🦄 Wow so easy!', {
+        toast.success('Email sent successfully', {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
