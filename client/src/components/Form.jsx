@@ -40,7 +40,7 @@ function Form() {
         body: formDataToSend,
       });
       
-      toast.promise(response, {
+      await toast.promise(response, {
         loading: 'sending email...',
         success: 'Email sent successfully',
         error: 'Error while sending email,try later',
