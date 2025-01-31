@@ -35,14 +35,15 @@ function Form() {
     console.log(formDataToSend)
 
     try {
-      toast.promise(submitHandler, {
-        loading: 'sending email...',
-        success: 'Email sent successfully',
-        error: 'Error while sending email,try later',
-      });
       const response = await fetch(process.env.REACT_APP_BASE_URL, {
         method: "POST",
         body: formDataToSend,
+      });
+      
+      toast.promise(response, {
+        loading: 'sending email...',
+        success: 'Email sent successfully',
+        error: 'Error while sending email,try later',
       });
 
       if (response.ok) {
