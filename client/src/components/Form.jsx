@@ -58,13 +58,14 @@ function Form() {
       toast.error("somthing went wrong")
       console.error("Error sending email:", error);
     }
+    toast.promise(submitHandler, {
+      loading: 'sending email...',
+      success: 'Email sent successfully',
+      error: 'Error while sending email,try later',
+    });
   }
 
-  toast.promise(submitHandler, {
-    loading: 'sending email...',
-    success: 'Email sent successfully',
-    error: 'Error while sending email,try later',
-  });
+ 
 
   return (
     <div>
