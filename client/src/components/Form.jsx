@@ -54,8 +54,11 @@ function Form() {
           });
         console.log(response)
       } 
-      toast.dismiss(toastId);
-      return toast.error("something went wrong")
+      else{
+        toast.dismiss(toastId);
+        toast.error("something went wrong")
+      }
+      
     }
      catch (error) {
       toast.dismiss(toastId);
