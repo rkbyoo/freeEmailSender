@@ -21,9 +21,9 @@ function Form() {
   }
 
   async function submitHandler(event) {
+    event.preventDefault();
     const toastId = toast.loading("Sending email...");
     try {
-      event.preventDefault();
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
