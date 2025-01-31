@@ -21,9 +21,9 @@ function Form() {
   }
 
   async function submitHandler(event) {
-    event.preventDefault();
     const toastId = toast.loading("Sending email...");
-
+    try {
+      event.preventDefault();
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
@@ -34,8 +34,6 @@ function Form() {
     }
 
     console.log(formDataToSend)
-
-    try {
       const response = await fetch(process.env.REACT_APP_BASE_URL, {
         method: "POST",
         body: formDataToSend,
@@ -56,12 +54,12 @@ function Form() {
           });
         console.log(response)
       } 
-    } catch (error) {
+    }
+     catch (error) {
       toast.dismiss(toastId);
       toast.error("somthing went wrong")
       console.error("Error sending email:", error);
     }
-    
   }
 
  
