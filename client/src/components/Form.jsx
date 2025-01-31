@@ -42,20 +42,20 @@ function Form() {
 
       if (response.ok) {
         console.log("email sent successfully")
-        toast.success('Email sent successfully', {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark"
-          });
+        // toast.success('Email sent successfully', {
+        //   position: "top-center",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: false,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "dark"
+        //   });
         console.log(response)
       } 
     } catch (error) {
-      toast.error("somthing went wrong")
+      // toast.error("somthing went wrong")
       console.error("Error sending email:", error);
     }
     toast.promise(submitHandler, {
