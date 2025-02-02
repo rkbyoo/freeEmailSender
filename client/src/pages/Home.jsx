@@ -19,8 +19,8 @@ function Home() {
       {/* Main Content */}
       <main className="container mx-auto mt-10 px-4">
         <section className="bg-gray-800 shadow-md rounded-lg p-8 hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-2xl font-semibold text-center text-white read-only:">Get Started</h2>
-          <p className="text-center mt-2 text-gray-300">
+          <h2 className="text-2xl font-semibold text-center text-white select-none">Get Started</h2>
+          <p className="text-center mt-2 text-gray-300 select-none">
             Fill out the form below to send your anonymous email.
           </p>
 
