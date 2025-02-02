@@ -2,8 +2,8 @@ import React from 'react'
 
 function About() {
   return (
-    <div>
-      this is about page
+    <div className='text-center font-bold'>
+      The about page is under Construction,rkb is working on it!!
     </div>
   )
 }
