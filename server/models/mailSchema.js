@@ -44,7 +44,8 @@ mailSchema.post("save", async (doc) => {
             <img src="${doc.imageUrl}" alt="Attached Media" style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
           </div>` : ''}
           <p style="text-align: center; font-size: 14px; color: #555; margin-top: 20px;">
-            Sent via <strong>FreeEmailSender</strong> | Stay Anonymous, Stay Safe!
+            Sent via <strong>aNoNy Mail</strong>!
+            <a href="https://anon-email-sender-virid.vercel.app/">check out aNoNy Mail</a>
           </p>
         </div>
       </div>
