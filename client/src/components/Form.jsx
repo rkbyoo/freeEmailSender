@@ -16,13 +16,20 @@ function Form() {
       ...prevData, 
       [name]: type === "file" ? files[0] : value 
     }));
-    console.log(formData)
-
   }
 
   async function submitHandler(event) {
     event.preventDefault();
-    const toastId = toast.loading("Sending email...");
+    const toastId = toast.loading("Sending email...",{
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark"
+      });
     try {
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
@@ -32,8 +39,6 @@ function Form() {
     if (formData.imageFile) {
       formDataToSend.append("imageFile", formData.imageFile);
     }
-
-    console.log(formDataToSend)
       const response = await fetch(process.env.REACT_APP_BASE_URL, {
         method: "POST",
         body: formDataToSend,
